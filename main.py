@@ -1,5 +1,6 @@
 import os
 import cv2
+import numpy as np
 
 folder_path = "images"
 
@@ -9,7 +10,11 @@ for file in os.listdir(folder_path):
     if any(file.lower().endswith(ext) for ext in image_extensions):
 
         path = os.path.join(folder_path, file)
-        img = cv2.imread(path)
+        
+        with open(path, "rb") as f:
+            data = np.frombuffer(f.read(), dtype=np.uint8)
+
+        img = cv2.imdecode(data, cv2.IMREAD_COLOR)
 
         if img is None:
             print("読み込み失敗:", file)
