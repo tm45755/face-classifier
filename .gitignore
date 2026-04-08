@@ -1,3 +1,4 @@
 images/
+*.tflite
 __pycache__/
 *.pyc
